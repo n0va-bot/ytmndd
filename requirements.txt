@@ -1,2 +1,0 @@
-httplib2==0.9
-simplejson==3.4.0
