@@ -8,8 +8,8 @@ import time
 import json
 import subprocess
 from optparse import OptionParser
-from urllib.request import urlopen, Request
-from urllib.error import URLError, HTTPError
+import requests
+from requests.exceptions import RequestException
 
 class YTMND:
 
@@ -29,11 +29,11 @@ class YTMND:
 
     ytmnd_name = user
     try:
-      req = Request("http://ytmnd.com/users/" + ytmnd_name + "/sites",
-                    headers={'User-Agent': 'Mozilla/5.0'})
-      with urlopen(req) as response:
-        ytmnd_html = response.read().decode('utf-8').splitlines()
-    except (URLError, HTTPError) as e:
+      response = requests.get("http://ytmnd.com/users/" + ytmnd_name + "/sites",
+                              headers={'User-Agent': 'Mozilla/5.0'})
+      response.raise_for_status()
+      ytmnd_html = response.text.splitlines()
+    except RequestException as e:
       print(f"Error fetching user page: {e}")
       return
 
@@ -83,10 +83,10 @@ class YTMND:
 
     ytmnd_name = domain
     try:
-      req = Request("http://" + domain + ".ytmnd.com",
-                    headers={'User-Agent': 'Mozilla/5.0'})
-      with urlopen(req) as response:
-        ytmnd_html = response.read().decode('utf-8')
+      response = requests.get("http://" + domain + ".ytmnd.com",
+                              headers={'User-Agent': 'Mozilla/5.0'})
+      response.raise_for_status()
+      ytmnd_html = response.text
 
       expr = r"ytmnd.site_id = (\d+);"
       match = re.search(expr, ytmnd_html)
@@ -95,12 +95,12 @@ class YTMND:
         return None
       ytmnd_id = match.group(1)
 
-      req = Request("http://" + domain + ".ytmnd.com/info/" + ytmnd_id + "/json",
-                    headers={'User-Agent': 'Mozilla/5.0'})
-      with urlopen(req) as response:
-        ytmnd_info = json.load(response)
+      response = requests.get("http://" + domain + ".ytmnd.com/info/" + ytmnd_id + "/json",
+                              headers={'User-Agent': 'Mozilla/5.0'})
+      response.raise_for_status()
+      ytmnd_info = response.json()
 
-    except (URLError, HTTPError) as e:
+    except RequestException as e:
       print(f"Error fetching {domain}: {e}")
       return None
 
