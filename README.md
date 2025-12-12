@@ -1,7 +1,7 @@
 ytmnd
 =====
 
-ytmnd scraper.
+An updated ytmnd scraper based on [https://github.com/julescarbon/ytmnd](https://github.com/julescarbon/ytmnd)
 
 `./ytmnd.py -u [username]`
 
@@ -12,7 +12,7 @@ serving
 
 this scraper will download the gif and mp3 from a ytmnd and write a file embedding these things in addition to zoom text (if any).
 
-the html files use the web audio api in an attempt to get seamless looping (oddly complicated).  since they download binary data, they cannot be loaded from a `file://` url.. to view these files, put them online. alternatively, run `python -m SimpleHTTPServer 8000` from the directory and navigate to e.g. http://lvh.me:8000/
+The downloaded files cannot be loaded from a `file://` url. In order to view these files, put them online or run a local server. For example, `python -m http.server` from the directory and got to [http://localhost:8000/](http://localhost:8000/)
 
 options
 -------
@@ -25,9 +25,3 @@ options
 | `--json-only`    | writes simplified json to a file |
 | `--no-web-audio` | uses the <audio> tag instead of web audio |
 | `--print-json`   | dumps raw json from ytmnd to stdout |
-
-license
--------
-
-_This software made available under the Jollo LNT License (Leave no trace)_
-
