@@ -1,11 +1,11 @@
-ytmnd
+ytmndd - ytmnd downloader
 =====
 
 An updated ytmnd scraper based on [https://github.com/julescarbon/ytmnd](https://github.com/julescarbon/ytmnd)
 
-`./ytmnd.py -u [username]`
+`./ytmndd.py -u [username]`
 
-`./ytmnd.py [domain]`
+`./ytmndd.py [domain]`
 
 serving
 -------
