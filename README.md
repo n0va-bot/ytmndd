@@ -12,7 +12,7 @@ serving
 
 this scraper will download the gif and mp3 from a ytmnd and write a file embedding these things in addition to zoom text (if any).
 
-The downloaded files cannot be loaded from a `file://` url. In order to view these files, put them online or run a local server. For example, `python -m http.server` from the directory and got to [http://localhost:8000/](http://localhost:8000/). If you host them somewhere, remember to include `ytmnd.js` in the same directory.
+The downloaded files cannot be loaded from a `file://` url. In order to view these files, put them online or run a local server. For example, `python -m http.server` from the directory and got to [http://localhost:8000/](http://localhost:8000/).
 
 options
 -------
