@@ -184,6 +184,16 @@ class YTMND:
                 "#zoom_text{position:absolute;left:0;top:0;width:1000px;z-index:10;text-align:center;font-family:Tahoma, sans-serif}\n"
             )
             fn.write("#zoom_text div{position:absolute;width:1000px}\n")
+            fn.write("@media (max-width: 768px) {\n")
+            fn.write(
+                "  #zoom_text{left:50%;top:50%;margin-left:-500px;-webkit-transform:translate(0,-50%) scale(0.55);-ms-transform:translate(0,-50%) scale(0.55);transform:translate(0,-50%) scale(0.55);-webkit-transform-origin:center center;-ms-transform-origin:center center;transform-origin:center center;}\n"
+            )
+            fn.write("}\n")
+            fn.write("@media (max-width: 480px) {\n")
+            fn.write(
+                "  #zoom_text{-webkit-transform:translate(0,-50%) scale(0.45);-ms-transform:translate(0,-50%) scale(0.45);transform:translate(0,-50%) scale(0.45);}\n"
+            )
+            fn.write("}\n")
             fn.write(
                 "#unmute-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;z-index:99999;cursor:pointer;}\n"
             )
