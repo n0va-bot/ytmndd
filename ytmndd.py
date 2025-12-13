@@ -137,8 +137,25 @@ class YTMND:
                 original_wav = value["file_url"]
                 wav_type = ytmnd_info["site"]["sound"]["file_type"]
 
-        subprocess.run(["wget", "--quiet", "-O", f"{domain}.{gif_type}", original_gif])
-        subprocess.run(["wget", "--quiet", "-O", f"{domain}.{wav_type}", original_wav])
+        try:
+            gif_response = requests.get(
+                original_gif, headers={"User-Agent": "Mozilla/5.0"}
+            )
+            gif_response.raise_for_status()
+            with open(f"{domain}.{gif_type}", "wb") as f:
+                f.write(gif_response.content)
+        except RequestException as e:
+            print(f"Error downloading gif: {e}")
+
+        try:
+            wav_response = requests.get(
+                original_wav, headers={"User-Agent": "Mozilla/5.0"}
+            )
+            wav_response.raise_for_status()
+            with open(f"{domain}.{wav_type}", "wb") as f:
+                f.write(wav_response.content)
+        except RequestException as e:
+            print(f"Error downloading audio: {e}")
 
     def write_index(self, ytmnd_info):
         domain = ytmnd_info["site"]["domain"]
